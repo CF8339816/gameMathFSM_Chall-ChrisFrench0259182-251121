@@ -13,14 +13,17 @@ namespace FSM_Challenge
         Idle, // not moving, not doing anything! Just chilling!
         Shooting, // pew pew!!!!!
         WalkingRandomly, // walk North, South, East or West 
-        WalkingInLine // Walk in a single direction
+        WalkingInLine // Walk in the opposite direction of lastEnemyPos
+        
     }
     internal class Program
     {
+        // You shouldn't have to change anything here
+        #region program_state
         static Random random = new Random();
         static (int, int) enemyPos = (5, 5);
         static (int, int) lastEnemyPos = (4, 5);
-
+        
         static int mapWidth = 20;
         static int mapHeight = 20;
 
@@ -29,7 +32,9 @@ namespace FSM_Challenge
         static (int, int) bulletDirection = (0, 0);
 
         static EnemyState currentEnemyState = EnemyState.Idle;
-
+        
+        static readonly (int, int) UI_OFFSET = (5, 5);
+        #endregion
 
         static void Main(string[] args)
         {
@@ -39,7 +44,7 @@ namespace FSM_Challenge
             {
                 DrawMap();
                 DrawEnemy();
-                
+                DrawState();
                 
                 // wait for bullets to finish traveling before continuing
                 while(bulletAlive)
@@ -49,7 +54,8 @@ namespace FSM_Challenge
                     Thread.Sleep(30);
                 }
                 currentEnemyState = ProcessState(currentEnemyState);
-                Thread.Sleep(250);
+
+                Thread.Sleep(100);
 
             }
 
@@ -59,13 +65,13 @@ namespace FSM_Challenge
         
         static EnemyState ProcessState(EnemyState state)
         {
-
+            // TODO: Use rand in the switch statement to determine transitions
             double rand = random.NextDouble();
 
             switch (state)
             {
                 case EnemyState.Idle:
-
+                    
                     if (rand < 0.1d) return EnemyState.Idle;
                     if (rand < 0.2d) return EnemyState.Shooting;
                     else return EnemyState.WalkingRandomly;
@@ -97,16 +103,15 @@ namespace FSM_Challenge
 
                     return EnemyState.WalkingInLine;
                      
-                    
-
                       
                 case EnemyState.WalkingInLine:
 
                     Move(enemyPos.Item1 - lastEnemyPos.Item1, enemyPos.Item2 - lastEnemyPos.Item2);
 
-                    if (rand < 0.2) return EnemyState.Shooting; 
+                    if (rand < 0.1) return EnemyState.Shooting;
+                    if (rand < 0.2) return EnemyState.Idle;
 
-                    return EnemyState.Idle;
+                    return EnemyState.WalkingInLine;
                 default:
                     return EnemyState.Idle; // this case should never happen
             }
@@ -209,6 +214,24 @@ namespace FSM_Challenge
             Console.Write(" ");
 
         }
+
+        static void DrawState()
+        {
+           
+            Console.ForegroundColor = enemyStateConsoleColors[currentEnemyState];
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.SetCursorPosition(mapWidth + UI_OFFSET.Item1, UI_OFFSET.Item2);
+            Console.Write("                     ");
+            Console.SetCursorPosition(mapWidth + UI_OFFSET.Item1, UI_OFFSET.Item2);
+            Console.Write(currentEnemyState);
+        }
+        static Dictionary<EnemyState, ConsoleColor> enemyStateConsoleColors = new Dictionary<EnemyState, ConsoleColor>
+        {
+            { EnemyState.Idle, ConsoleColor.White },
+            {EnemyState.WalkingRandomly, ConsoleColor.Green},
+            {EnemyState.WalkingInLine, ConsoleColor.DarkGreen },
+            {EnemyState.Shooting, ConsoleColor.Red }
+        };
 
 
 
