@@ -70,17 +70,13 @@ namespace FSM_Challenge
             switch (state)
             {
                 case EnemyState.Idle:
-
-                    switch()
                     {
-                        case EnemyState.Idle:
-                            if (rand <= 0.15) return EnemyState.Idle;
-                            if (rand <= 0.16 && <= 0.35) return EnemyState.Shooting;
-                            if (rand <= 0.36 && <= 0.85) return EnemyState.WalkingRandomly;
-                            if (rand <= 0.86 && <= 1.00) return EnemyState.WalkingInLine;
-                            
-                            return EnemyState.Idle;
-                   
+                        if (rand <= 0.15) return EnemyState.Idle;
+                        if (rand <= 0.35) return EnemyState.Shooting;
+                        if (rand <= 0.85) return EnemyState.WalkingRandomly;
+                        if (rand <= 1.00) return EnemyState.WalkingInLine;
+
+                        return EnemyState.Idle;
                     }
 
                     //TODO: transition to other states based on rand
@@ -89,12 +85,14 @@ namespace FSM_Challenge
                     return EnemyState.WalkingRandomly;
 
                 case EnemyState.Shooting:
-                    Shoot();
-                    if (rand <= 0.10) return EnemyState.Idle;
-                    if (rand <= 0.11 && <= 0.45) return EnemyState.Shooting;
-                    if (rand <= 0.46 && <= 0.80) return EnemyState.WalkingRandomly;
-                    if (rand <= 0.81 && <= 1.00) return EnemyState.WalkingInLine;
+                    {
+                        Shoot();
 
+                        if (rand <= 0.10) return EnemyState.Idle;
+                        if (rand <= 0.45) return EnemyState.Shooting;
+                        if (rand <= 0.80) return EnemyState.WalkingRandomly;
+                        if (rand <= 1.00) return EnemyState.WalkingInLine;
+                    }
                     // note: there is a Shoot method ready for use! 
                     return EnemyState.WalkingRandomly;
 
@@ -102,143 +100,135 @@ namespace FSM_Challenge
 
                     if (rand <= 0.125)
                     {
-                       Move(1, 0)
+                        Move(1, 0);
+                        lastEnemyPos = enemyPos;
 
-                        case EnemyState.WalkingRandomly:
-                            {
-                                if (rand <= 0.15) return EnemyState.WalkingRandomly;
-                                if (rand <= 0.16 && <= 0.60) return EnemyState.Shooting;
-                                if (rand <= 0.61 && <= 0.85) return EnemyState.Idle;
-                                if (rand <= 0.86 && <= 1.00) return EnemyState.WalkingInLine;
-                            }
+                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
+                        if (rand <= 0.60) return EnemyState.Shooting;
+                        if (rand <= 0.85) return EnemyState.Idle;
+                        if (rand <= 1.00) return EnemyState.WalkingInLine;
                         
-                            return EnemyState.WalkingRandomly;
+                        return EnemyState.WalkingRandomly;
+                    }
+
+                    if (rand <= 0.250)
+                    {
+                        Move(-1, 0);
+                        lastEnemyPos = enemyPos;
+
+                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
+                        if (rand <= 0.60) return EnemyState.Shooting;
+                        if (rand <= 0.85) return EnemyState.Idle;
+                        if (rand <= 1.00) return EnemyState.WalkingInLine;
+                       
+                        return EnemyState.WalkingRandomly;
+                    }
+
+                    if (rand <= 0.375)
+                    {
+                        Move(0, -1);
+                        lastEnemyPos = enemyPos;
+
+                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
+                        if (rand <= 0.60) return EnemyState.Shooting;
+                        if (rand <= 0.85) return EnemyState.Idle;
+                        if (rand <= 1.00) return EnemyState.WalkingInLine;
+                        
+                        return EnemyState.WalkingRandomly;
+                    }
+
+                    if (rand <= 0.500)
+                    {
+                        Move(0, 1);
+                        lastEnemyPos = enemyPos;
+
+                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
+                        if (rand <= 0.60) return EnemyState.Shooting;
+                        if (rand <= 0.85) return EnemyState.Idle;
+                        if (rand <= 1.00) return EnemyState.WalkingInLine;
+                       
+                        return EnemyState.WalkingRandomly;
+                    }
+
+                    if (rand <= 0.625)
+                    {
+                        Move(1, 1);
+                        lastEnemyPos = enemyPos;
+
+                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
+                        if (rand <= 0.60) return EnemyState.Shooting;
+                        if (rand <= 0.85) return EnemyState.Idle;
+                        if (rand <= 1.00) return EnemyState.WalkingInLine;
+                        
+                        return EnemyState.WalkingRandomly;
+                    }
+
+                    if (rand <= 0.750)
+                    {
+                        Move(-1, 1);
+                        lastEnemyPos = enemyPos;
+
+                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
+                        if (rand <= 0.60) return EnemyState.Shooting;
+                        if (rand <= 0.85) return EnemyState.Idle;
+                        if (rand <= 1.00) return EnemyState.WalkingInLine;
+                       
+                        return EnemyState.WalkingRandomly;
+                    }
+
+                    if (rand <= 0.875)
+                    {
+                        Move(1, -1);
+                        lastEnemyPos = enemyPos;
+
+                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
+                        if (rand <= 0.60) return EnemyState.Shooting;
+                        if (rand <= 0.85) return EnemyState.Idle;
+                        if (rand <= 1.00) return EnemyState.WalkingInLine;
+                       
+                        return EnemyState.WalkingRandomly;
+                    }
+
+                    if (rand <= 1.00)
+                    {
+                        Move(-1, -1);
+                        lastEnemyPos = enemyPos;
+
+                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
+                        if (rand <= 0.60) return EnemyState.Shooting;
+                        if (rand <= 0.85) return EnemyState.Idle;
+                        if (rand <= 1.00) return EnemyState.WalkingInLine;
+                        
+                        return EnemyState.WalkingRandomly;
+                    }
+
+                //TODO: move up, down, left or right randomly
+                case EnemyState.WalkingInLine:
+
+                    if (enemyPos != lastEnemyPos)
+                    {
+                        if (enemyPos.Item1 > lastEnemyPos.Item1) Move(1, 0);
+                        if (enemyPos.Item1 < lastEnemyPos.Item1) Move(-1, 0);
+                        if (enemyPos.Item2 > lastEnemyPos.Item2) Move(0, 1);
+                        if (enemyPos.Item2 < lastEnemyPos.Item2) Move(0, -1);
+
+                        lastEnemyPos = enemyPos;
+
+                        if (rand < 0.20) return EnemyState.Idle;
+                        if (rand < 0.60) return EnemyState.WalkingInLine;
+                        if (rand < 0.85) return EnemyState.WalkingRandomly;
+                        if (rand < 1.00) return EnemyState.Shooting;
+                       
+                        return EnemyState.WalkingInLine;
 
                     }
-                    if (rand <= 0.126 && <= 0.250)
 
-                        Move(-1, 0)
-
-                        case EnemyState.WalkingRandomly:
-                            {
-                                if (rand <= 0.15) return EnemyState.WalkingRandomly;
-                                if (rand <= 0.16 && <= 0.60) return EnemyState.Shooting;
-                                if (rand <= 0.61 && <= 0.85) return EnemyState.Idle;
-                                if (rand <= 0.86 && <= 1.00) return EnemyState.WalkingInLine;
-                            }
-                            return EnemyState.WalkingRandomly;
-
-
-                            if (rand <= 0.251 && <= 0.375)
-
-                        Move(0, -1)
-
-                        case EnemyState.WalkingRandomly:
-                            {
-                                if (rand <= 0.15) return EnemyState.WalkingRandomly;
-                                if (rand <= 0.16 && <= 0.60) return EnemyState.Shooting;
-                                if (rand <= 0.61 && <= 0.85) return EnemyState.Idle;
-                                if (rand <= 0.86 && <= 1.00) return EnemyState.WalkingInLine;
-                            }
-                            return EnemyState.WalkingRandomly;
-
-                        if (rand <= 0.376 && <= 0.500)
-
-                        Move(0, 1)
-
-                        case EnemyState.WalkingRandomly:
-                            {
-                                if (rand <= 0.15) return EnemyState.WalkingRandomly;
-                                if (rand <= 0.16 && <= 0.60) return EnemyState.Shooting;
-                                if (rand <= 0.61 && <= 0.85) return EnemyState.Idle;
-                                if (rand <= 0.86 && <= 1.00) return EnemyState.WalkingInLine;
-                            }
-
-                            return EnemyState.WalkingRandomly;
-
-                            if (rand <= 0.501 && <= 0.625)
-                            {
-                                Move(1, 1)
-
-                        case EnemyState.WalkingRandomly:
-                                    {
-                                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
-                                        if (rand <= 0.16 && <= 0.60) return EnemyState.Shooting;
-                                        if (rand <= 0.61 && <= 0.85) return EnemyState.Idle;
-                                        if (rand <= 0.86 && <= 1.00) return EnemyState.WalkingInLine;
-                                    }
-
-                                    return EnemyState.WalkingRandomly;
-
-                                }
-                                if (rand <= 0.626 && <= 0.750)
-
-                                    Move(-1, 1)
-
-                        case EnemyState.WalkingRandomly:
-                                    {
-                                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
-                                        if (rand <= 0.16 && <= 0.60) return EnemyState.Shooting;
-                                        if (rand <= 0.61 && <= 0.85) return EnemyState.Idle;
-                                        if (rand <= 0.86 && <= 1.00) return EnemyState.WalkingInLine;
-                                    }
-                                    return EnemyState.WalkingRandomly;
-
-
-                                    if (rand <= 0.751 && <= 0.875)
-
-                                        Move(1, -1)
-
-                        case EnemyState.WalkingRandomly:
-                                    {
-                                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
-                                        if (rand <= 0.16 && <= 0.60) return EnemyState.Shooting;
-                                        if (rand <= 0.61 && <= 0.85) return EnemyState.Idle;
-                                        if (rand <= 0.86 && <= 1.00) return EnemyState.WalkingInLine;
-                                    }
-                                    return EnemyState.WalkingRandomly;
-
-                                    if (rand <= 0.876 && <= 1.00)
-
-                                        Move(-1, -1)
-
-                        case EnemyState.WalkingRandomly:
-                                    {
-                                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
-                                        if (rand <= 0.16 && <= 0.60) return EnemyState.Shooting;
-                                        if (rand <= 0.61 && <= 0.85) return EnemyState.Idle;
-                                        if (rand <= 0.86 && <= 1.00) return EnemyState.WalkingInLine;
-                                    }
-
-                                    return EnemyState.WalkingRandomly;
-
-
-
-
-
-
-
-                                    //if (rand <= 0.15) return EnemyState.WalkingRandomly;
-                                    //if (rand <= 0.16 && <= 0.60) return EnemyState.Shooting;
-                                    //if (rand <= 0.61&& <= 0.85) return EnemyState.Idle; 
-                                    //if (rand <= 0.86 && <= 1.00) return EnemyState.WalkingInLine;
-
-                                    //TODO: move up, down, left or right randomly
-                                    return EnemyState.WalkingRandomly;
-
-                case EnemyState.WalkingInLine:
                     //TODO: move player in direction they previously moved.
                     //HINT: there is a lastEnemyPos variable that tells you the previous position!
-                    if (rand <= 0.20) return EnemyState.Idle;
-                    if (rand <= 0.21 && <= 0.60) return EnemyState.Shooting;
-                    if (rand <= 0.61 && <= 0.85) return EnemyState.WalkingRandomly;
-                    if (rand <= 0.86 && <= 1.00) return EnemyState.WalkingInLine;
-                    return EnemyState.Idle;
-               
-                default:
-                    return EnemyState.Idle; // this case should never happen
             }
-
+                 // default:
+                    return EnemyState.Idle; // this case should never happen
+                               
         }
 
         #region METHODS_DO_NOT_EDIT
