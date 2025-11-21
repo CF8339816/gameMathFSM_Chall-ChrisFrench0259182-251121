@@ -76,13 +76,13 @@ namespace FSM_Challenge
                         if (rand <= 0.85) return EnemyState.WalkingRandomly;
                         if (rand <= 1.00) return EnemyState.WalkingInLine;
 
-                        return EnemyState.Idle;
                     }
+                        return EnemyState.Idle;
 
                     //TODO: transition to other states based on rand
                     //HINT: you can also return EnemyState.Idle sometimes to add more variation
 
-                    return EnemyState.WalkingRandomly;
+                    
 
                 case EnemyState.Shooting:
                     {
@@ -94,11 +94,11 @@ namespace FSM_Challenge
                         if (rand <= 1.00) return EnemyState.WalkingInLine;
                     }
                     // note: there is a Shoot method ready for use! 
-                    return EnemyState.WalkingRandomly;
+                    return EnemyState.Idle;
 
                 case EnemyState.WalkingRandomly:
 
-                    if (rand <= 0.125)
+                    if (rand <= 0.25) // if (rand <= 0.125)
                     {
                         Move(1, 0);
                         lastEnemyPos = enemyPos;
@@ -108,10 +108,10 @@ namespace FSM_Challenge
                         if (rand <= 0.85) return EnemyState.Idle;
                         if (rand <= 1.00) return EnemyState.WalkingInLine;
                         
-                        return EnemyState.WalkingRandomly;
                     }
+                       // return EnemyState.WalkingRandomly;
 
-                    if (rand <= 0.250)
+                    if (rand <= 0.50) // if (rand <= 0.250)
                     {
                         Move(-1, 0);
                         lastEnemyPos = enemyPos;
@@ -121,10 +121,10 @@ namespace FSM_Challenge
                         if (rand <= 0.85) return EnemyState.Idle;
                         if (rand <= 1.00) return EnemyState.WalkingInLine;
                        
-                        return EnemyState.WalkingRandomly;
                     }
+                       // return EnemyState.WalkingRandomly;
 
-                    if (rand <= 0.375)
+                    if (rand <= 0.75) //if (rand <= 0.375)
                     {
                         Move(0, -1);
                         lastEnemyPos = enemyPos;
@@ -134,10 +134,11 @@ namespace FSM_Challenge
                         if (rand <= 0.85) return EnemyState.Idle;
                         if (rand <= 1.00) return EnemyState.WalkingInLine;
                         
-                        return EnemyState.WalkingRandomly;
                     }
+                        //return EnemyState.WalkingRandomly;
 
-                    if (rand <= 0.500)
+                    if (rand <= 1.00) //if (rand <= 0.500)
+
                     {
                         Move(0, 1);
                         lastEnemyPos = enemyPos;
@@ -147,61 +148,61 @@ namespace FSM_Challenge
                         if (rand <= 0.85) return EnemyState.Idle;
                         if (rand <= 1.00) return EnemyState.WalkingInLine;
                        
-                        return EnemyState.WalkingRandomly;
                     }
-
-                    if (rand <= 0.625)
-                    {
-                        Move(1, 1);
-                        lastEnemyPos = enemyPos;
-
-                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
-                        if (rand <= 0.60) return EnemyState.Shooting;
-                        if (rand <= 0.85) return EnemyState.Idle;
-                        if (rand <= 1.00) return EnemyState.WalkingInLine;
-                        
                         return EnemyState.WalkingRandomly;
-                    }
+                #region //tried to get diagonal movement working 
+                //if (rand <= 0.625)
+                //{
+                //    Move(1, 1);
+                //    lastEnemyPos = enemyPos;
 
-                    if (rand <= 0.750)
-                    {
-                        Move(-1, 1);
-                        lastEnemyPos = enemyPos;
+                //    if (rand <= 0.15) return EnemyState.WalkingRandomly;
+                //    if (rand <= 0.60) return EnemyState.Shooting;
+                //    if (rand <= 0.85) return EnemyState.Idle;
+                //    if (rand <= 1.00) return EnemyState.WalkingInLine;
 
-                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
-                        if (rand <= 0.60) return EnemyState.Shooting;
-                        if (rand <= 0.85) return EnemyState.Idle;
-                        if (rand <= 1.00) return EnemyState.WalkingInLine;
-                       
-                        return EnemyState.WalkingRandomly;
-                    }
+                //}
+                //    return EnemyState.WalkingRandomly;
 
-                    if (rand <= 0.875)
-                    {
-                        Move(1, -1);
-                        lastEnemyPos = enemyPos;
+                //if (rand <= 0.750)
+                //{
+                //    Move(-1, 1);
+                //    lastEnemyPos = enemyPos;
 
-                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
-                        if (rand <= 0.60) return EnemyState.Shooting;
-                        if (rand <= 0.85) return EnemyState.Idle;
-                        if (rand <= 1.00) return EnemyState.WalkingInLine;
-                       
-                        return EnemyState.WalkingRandomly;
-                    }
+                //    if (rand <= 0.15) return EnemyState.WalkingRandomly;
+                //    if (rand <= 0.60) return EnemyState.Shooting;
+                //    if (rand <= 0.85) return EnemyState.Idle;
+                //    if (rand <= 1.00) return EnemyState.WalkingInLine;
 
-                    if (rand <= 1.00)
-                    {
-                        Move(-1, -1);
-                        lastEnemyPos = enemyPos;
+                //}
+                //    return EnemyState.WalkingRandomly;
 
-                        if (rand <= 0.15) return EnemyState.WalkingRandomly;
-                        if (rand <= 0.60) return EnemyState.Shooting;
-                        if (rand <= 0.85) return EnemyState.Idle;
-                        if (rand <= 1.00) return EnemyState.WalkingInLine;
-                        
-                        return EnemyState.WalkingRandomly;
-                    }
+                //if (rand <= 0.875)
+                //{
+                //    Move(1, -1);
+                //    lastEnemyPos = enemyPos;
 
+                //    if (rand <= 0.15) return EnemyState.WalkingRandomly;
+                //    if (rand <= 0.60) return EnemyState.Shooting;
+                //    if (rand <= 0.85) return EnemyState.Idle;
+                //    if (rand <= 1.00) return EnemyState.WalkingInLine;
+
+                //}
+                //    return EnemyState.WalkingRandomly;
+
+                //if (rand <= 1.00)
+                //{
+                //    Move(-1, -1);
+                //    lastEnemyPos = enemyPos;
+
+                //    if (rand <= 0.15) return EnemyState.WalkingRandomly;
+                //    if (rand <= 0.60) return EnemyState.Shooting;
+                //    if (rand <= 0.85) return EnemyState.Idle;
+                //    if (rand <= 1.00) return EnemyState.WalkingInLine;
+
+                //}
+                //    return EnemyState.WalkingRandomly;
+                #endregion
                 //TODO: move up, down, left or right randomly
                 case EnemyState.WalkingInLine:
 
@@ -219,9 +220,8 @@ namespace FSM_Challenge
                         if (rand < 0.85) return EnemyState.WalkingRandomly;
                         if (rand < 1.00) return EnemyState.Shooting;
                        
-                        return EnemyState.WalkingInLine;
-
                     }
+                        return EnemyState.WalkingInLine;
 
                     //TODO: move player in direction they previously moved.
                     //HINT: there is a lastEnemyPos variable that tells you the previous position!
